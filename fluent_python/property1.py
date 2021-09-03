@@ -7,32 +7,14 @@ import json
 URL = 'http://www.oreilly.com/pub/sc/osconfeed'
 JSON = './osconfeed.json'
 
-
-def load():
-    if not os.path.exists(JSON):
-        msg = 'downloading {} to {}'.format(URL, JSON)
-        warnings.warn(msg)  # 发出提醒
-        with urlopen(URL) as remote, open(JSON, 'wb') as local:
-            # 使用两个上下文管理器
-            local.write(remote.read())
-            # 读取和保存远程文件
-    with open(JSON) as fp:
-        return json.load(fp)
-
-
-feed = load()
-print(feed)
-print(sorted(feed['Schedule'].keys()))
-for key, value in sorted(feed['Schedule'].items()):
-    print('{:3} {}'.format(len(value), key))
-print(feed['Schedule']['speakers'][-1]['serial'])
-# 这种句法太长了。。。如何改进
-
 from collections import abc
 
 
 class FrozenJSON:
     # 一个只读接口，使用属性表示法访问JSON类对象
+    def __new__(cls, arg):
+
+
     def __init__(self, mapping):
         self.__data = {}
         for k,v in mapping.items():
