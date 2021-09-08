@@ -12,12 +12,17 @@ from collections import abc
 
 class FrozenJSON:
     # 一个只读接口，使用属性表示法访问JSON类对象
-    def __new__(cls, arg):
-
+    def __new__(cls, arg):  # 第一个参数是类本身
+        if isinstance(arg, abc.Mapping):
+            return super().__new__(cls)
+        elif isinstance(arg, abc.MutableSequence):
+            return [cls(item) for item in arg]
+        else:
+            return arg
 
     def __init__(self, mapping):
         self.__data = {}
-        for k,v in mapping.items():
+        for k, v in mapping.items():
             if keyword.iskeyword(k):
                 k += "_"
             if not k.isidentifier():
@@ -29,29 +34,7 @@ class FrozenJSON:
             return getattr(self.__data, name)
             # 调用 keys 等方法就是通过这种方式处理的
         else:  # 没有，构建 FrozenJSON
-            return FrozenJSON.build(self.__data[name])
-
-    @classmethod  # 备选构造方法，@classmethod 装饰器经常这么用
-    def build(cls, obj):
-        if isinstance(obj, abc.Mapping):
-            return cls(obj)  # 构建 FrozenJSON
-        elif isinstance(obj, abc.MutableSequence):
-            # 是序列，对每个元素都进行 build
-            return [cls.build(item) for item in obj]
-        else:
-            return obj
-
-
-raw_feed = load()
-feed = FrozenJSON(raw_feed)
-print(len(feed.Schedule.speakers))
-print(sorted(feed.Schedule.keys()))  # ['conferences', 'events', 'speakers', 'venues']
-print(feed.Schedule.events[-1].name)  # Why Schools Don't Use Open Source to Teach Programming
-p = feed.Schedule.events[-1]
-print(type(p))  # <class '__main__.FrozenJSON'>
-print(p.name)  # Why Schools Don't Use Open Source to Teach Programming
-print(p.speakers)  # [157509]
-# print(p.age)  # KeyError: 'age'
+            return FrozenJSON(self.__data[name])
 
 
 grad = FrozenJSON({'name': 'Jim Bo', 'class': 1982})
@@ -60,4 +43,41 @@ grad = FrozenJSON({'name': 'Jim Bo', 'class': 1982})
 print(grad.class_)
 
 grad = FrozenJSON({'2name': 'Jim Bo', 'class': 1982})
-print(grad._2name) # SyntaxError: invalid syntax
+print(grad._2name)  # SyntaxError: invalid syntax
+
+
+class Class:
+    data = "class data attr"
+    @property
+    def prop(self):
+        return "prop value"
+
+obj = Class()
+print(vars(obj)) # {}, vars 函数返回 obj 的 __dict__ 属性
+print(obj.data) # class data attr
+obj.data = "changed"
+print(vars(obj)) # {'data': 'changed'}
+print(Class.data) # class data attr
+# 实例修改了data，但是 类属性没有被修改
+
+print(Class.prop) # <property object at 0x0000021A91E4A680>
+print(obj.prop) # prop value
+# obj.prop = "changed prop"  # 报错 can't set attribute
+obj.__dict__["prop"] = "changed prop1"
+print(vars(obj)) # {'data': 'changed', 'prop': 'changed prop1'}
+print(obj.prop) # prop value #
+# 读取 obj.prop 时仍会运行特性的读值方法。特性没被实例属性遮盖
+Class.prop = "haha" # 覆盖 Class.prop 特性，销毁特性对象
+print(obj.prop) # changed prop1
+# 现在，obj.prop 获取的是实例属性。
+# Class.prop 不是特性了，因此不会再覆盖 obj.prop。
+
+print(obj.data) # changed
+print(Class.data) # class data attr
+Class.data = property(lambda self : "data prop value")
+# 使用新特性覆盖 Class.data
+print(obj.data) # data prop value
+# obj.data 被 Class.data 特性遮盖了
+del Class.data # 删除特性
+print(obj.data) # changed
+# 恢复原样，obj.data 获取的是实例属性 data
