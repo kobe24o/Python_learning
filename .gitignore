@@ -6,3 +6,6 @@
 .idea/inspectionProfiles/profiles_settings.xml
 fluent_python/__pycache__/clockdeco.cpython-38.pyc
 fluent_python/__pycache__/clockdeco2.cpython-38.pyc
+fastapi/1/__pycache__/main.cpython-38.pyc
+fastapi/2/__pycache__/body.cpython-38.pyc
+fastapi/2/__pycache__/main.cpython-38.pyc
