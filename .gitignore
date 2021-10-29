@@ -26,3 +26,10 @@ fastapi/9/__pycache__/main7.cpython-38.pyc
 fastapi/9/__pycache__/main8.cpython-38.pyc
 fastapi/9/__pycache__/main10.cpython-38.pyc
 fastapi/9/__pycache__/main9.cpython-38.pyc
+fastapi/myproject/__pycache__/dependencies.cpython-38.pyc
+fastapi/myproject/__pycache__/main.cpython-38.pyc
+fastapi/myproject/internal/__pycache__/__init__.cpython-38.pyc
+fastapi/myproject/internal/__pycache__/admin.cpython-38.pyc
+fastapi/myproject/routers/__pycache__/__init__.cpython-38.pyc
+fastapi/myproject/routers/__pycache__/items.cpython-38.pyc
+fastapi/myproject/routers/__pycache__/users.cpython-38.pyc
