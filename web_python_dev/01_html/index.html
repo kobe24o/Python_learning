@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Michael 学习python web 开发</title>
+</head>
+<body>
+<h1> 第一章 h1</h1> <!--这是注释格式-->
+<h2> 第一节 h2</h2>
+<p>第一章学习 html基础内容 p </p>
+<a href="http://www.baidu.com"> 百度链接</a>
+
+<table border="1">
+    <tr>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>性别</td>
+    </tr>
+    <tr>
+        <td>张三</td>
+        <td>20</td>
+        <td>男</td>
+    </tr>
+    <tr>
+        <td>李四</td>
+        <td>21</td>
+        <td>女</td>
+    </tr>
+</table>
+
+<h4 style="text-align: center">课程表</h4>
+<table border="1" cellpadding="10" width="100%">
+    <tr>
+        <td colspan="2">时间/日期</td>
+        <td>星期一</td>
+        <td>星期二</td>
+        <td>星期三</td>
+        <td>星期四</td>
+        <td>星期五</td>
+        <td>星期六</td>
+        <td>星期日</td>
+    </tr>
+    <tr>
+        <td rowspan="2">上午</td>
+        <th>9:30-10:15</th>
+        <td>语文</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>物理</td>
+        <td>化学</td>
+        <td>生物</td>
+        <td>政治</td>
+    </tr>
+
+
+    <tr>
+        <th>10:25-11:10</th>
+        <td>语文</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>物理</td>
+        <td>化学</td>
+        <td>生物</td>
+        <td>政治</td>
+    </tr>
+
+    <tr>
+        <th colspan="9"></th>
+    </tr>
+
+    <tr>
+        <td rowspan="2">下午</td>
+        <th>14:30-15:15</th>
+        <td>语文</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>物理</td>
+        <td>化学</td>
+        <td>生物</td>
+        <td>政治</td>
+    </tr>
+    <tr>
+        <th>15:25-16:10</th>
+        <td>语文</td>
+        <td>数学</td>
+        <td>英语</td>
+        <td>物理</td>
+        <td>化学</td>
+        <td>生物</td>
+        <td>政治</td>
+    </tr>
+</table>
+
+<h4>数字编号</h4>
+<ol>
+    <li>学习python</li>
+    <li>学习html</li>
+    <li>学习css</li>
+    <li>学习javascript</li>
+    <li>学习jquery</li>
+</ol>
+
+<h4>字母编号</h4>
+<ol type="i">
+    <li>学习python</li>
+    <li>学习html</li>
+    <li>学习css</li>
+    <li>学习javascript</li>
+    <li>学习jquery</li>
+</ol>
+
+<h4>手机类别</h4>
+<ul>
+    <li>小米手机</li>
+    <li>华为手机</li>
+    <ul>
+        <li>华为 P10</li>
+        <li>华为 P20</li>
+        <ol>
+            <li>8GB+128GB</li>
+            <li>8GB+256GB</li>
+        </ol>
+    </ul>
+    <li>苹果😀手机</li>
+</ul>
+
+<h4>汽车类别</h4>
+<dl>
+    <dt>国产汽车</dt>
+        <dd>-->比亚迪</dd>
+        <dd>-->长安</dd>
+    <dt>进口汽车</dt>
+        <dd>-->特斯拉</dd>
+</dl>
+
+<form>
+    <input name="user" type="text" value="默认名" size="12" maxlength="5">
+</form>
+
+<form>
+    <input name="密码" type="password" value="123456" size="25" maxlength="12">
+</form>
+
+<form>
+    <input name="uploadfile" type="file" formenctype="multipart/form-data" size="20" maxlength="12">
+</form>
+
+<form>
+    <input name="图片" type="image" src="xxx.jpg" width="120" height="150">
+</form>
+
+<form>
+    <input name="选择性别" type="radio" value="1" checked>男
+    <input name="选择性别" type="radio" value="0">女
+</form>
+
+<form>
+    <input name="box" type="checkbox" value="1" checked>封面
+    <br>
+    <input name="box" type="checkbox" value="1" checked>正文
+    <br>
+    <input name="box" type="checkbox" value="2">目录
+</form>
+
+<from>
+    <input name="提交" type="submit" value="提交论文">
+</from>
+
+<from>
+    <input name="重置" type="reset" value="重置输入">
+</from>
+
+<from>
+    <input name="普通按钮" type="button" value="发射">
+</from>
+
+<from>
+    <input name="隐藏的东西" type="hidden" value="bookisbn">
+</from>
+
+<from>
+    <select name="学习内容" id="learning">
+        <option value="0" selected>FastAPI</option>
+        <option value="1">Flask</option>
+        <option value="0">Django</option>
+    </select>
+</from>
+
+<from>
+    <select name="学习内容" id="learning1" multiple>
+        <option value="0" selected>FastAPI</option>
+        <option value="1">Flask</option>
+        <option value="2">Django</option>
+        <option value="3">others</option>
+    </select>
+</from>
+
+<textarea name="文本输入" cols="20" rows="4" id="标记">默认的文字
+</textarea>
+
+
+</body>
+</html>
