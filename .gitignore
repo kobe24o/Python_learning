@@ -39,3 +39,17 @@ fastapi/9/__pycache__/main13.cpython-38-pytest-6.2.5.pyc
 fastapi/9/__pycache__/main13.cpython-38.pyc
 fastapi/9/log.txt
 web_python_dev/01_html/陈明明1寸.jpg
+.idea/sqldialects.xml
+.idea/dataSources.xml
+web_python_dev/__pycache__/__init__.cpython-38.pyc
+web_python_dev/fastapi_guess_idiom/routers/__pycache__/__init__.cpython-38.pyc
+web_python_dev/fastapi_guess_idiom/routers/__pycache__/games.cpython-38.pyc
+web_python_dev/fastapi_guess_idiom/routers/__pycache__/users.cpython-38.pyc
+web_python_dev/fastapi_guess_idiom/utils/__pycache__/__init__.cpython-38.pyc
+web_python_dev/fastapi_guess_idiom/utils/__pycache__/user_auth.cpython-38.pyc
+web_python_dev/fastapi_mysql/__pycache__/__init__.cpython-38.pyc
+web_python_dev/fastapi_mysql/__pycache__/crud.cpython-38.pyc
+web_python_dev/fastapi_mysql/__pycache__/database.cpython-38.pyc
+web_python_dev/fastapi_mysql/__pycache__/main.cpython-38.pyc
+web_python_dev/fastapi_mysql/__pycache__/models.cpython-38.pyc
+web_python_dev/fastapi_mysql/__pycache__/schemas.cpython-38.pyc

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery事件</title>
+
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+
+</head>
+<body>
+
+<p id="p1">michael 学习web开发</p>
+<script>
+    $(document).ready(function(){
+        $("#p1").hover(function(){
+            $(this).css("color","red");
+            alert("鼠标在我上面悬停");
+        },function(){
+            $(this).css("color","black");
+            alert("鼠标离开元素");
+        })
+    })
+</script>
+
+</body>
+</html>

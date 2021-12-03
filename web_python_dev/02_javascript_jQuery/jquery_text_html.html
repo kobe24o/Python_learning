@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取内容</title>
+
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+
+</head>
+<body>
+
+<p id = "test">这是文字中 <b>加粗</b> 的文字</p>
+<button id="bt1">显示文本text</button>
+<button id="bt2">显示HTML</button>
+
+<script>
+    $("#bt1").click(function () {
+       alert("text:"+$("#test").text());
+    });
+    $("#bt2").click(function () {
+        alert("html:"+$("#test").html());
+    });
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>按钮事件</title>
+</head>
+<body>
+
+<p>单击按钮获取当前时间: 执行 <em>displayDate()</em> 函数。</p>
+<button onclick="displayDate()">获取时间</button>
+<script>
+    function displayDate() {
+        var d = new Date(); // 实例化日期
+        var now = d.toLocaleString(); // 转换为本地时间格式
+        document.getElementById("here").innerHTML = now;//写入 id 为 here的元素中
+    }
+</script>
+<p id="here"></p>
+
+</body>
+</html>

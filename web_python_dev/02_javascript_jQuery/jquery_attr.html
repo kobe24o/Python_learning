@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>属性值读取，设置</title>
+
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+
+</head>
+<body>
+
+<div>
+    <a id="url1" href="https://michael.blog.csdn.net/">Michael阿明博客地址</a>
+</div>
+<button id="button1">读取url地址</button>
+<button id="button2">修改url地址</button>
+
+<script>
+    $("#button1").click(function () {
+        var url = $("#url1").attr("href");
+        alert(url);
+    });
+
+    $("#button2").click(function () {
+        $("#url1").attr("href", "https://www.baidu.com/");
+        $("#url1").html("百度首页地址");
+    });
+</script>
+
+</body>
+</html>

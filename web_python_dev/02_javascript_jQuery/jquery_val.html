@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取val, 验证字符串长度</title>
+
+    <script src="https://cdn.staticfile.org/jquery/3.6.0/jquery.js"></script>
+
+</head>
+<body>
+
+<h4>请填写用户信息：</h4>
+<form method="post" action="">
+    <div>
+        <label for="username">用户名：</label>
+        <input type="text" id="username" name="username" value="">
+    </div>
+    <div>
+        <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+        <input type="password" id="password" name="password" value="">
+    </div>
+    <div>
+        <button id="bt1" type="submit" name="submit">提交</button>
+    </div>
+</form>
+
+<script>
+    $("#bt1").click(function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        if (username.length < 3) {
+            alert("用户名长度不能小于3位");
+            return False;
+        }
+
+        if (password.length < 6) {
+            alert("密码长度不能小于6位");
+            return False;
+        }
+
+        return True;
+    });
+</script>
+
+</body>
+</html>
+
+
