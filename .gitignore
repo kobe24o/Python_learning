@@ -69,3 +69,4 @@ web_python_dev/__pycache__/__init__.cpython-39.pyc
 alembic/__pycache__/env.cpython-39.pyc
 alembic/versions/__pycache__/d5092612bece_initial_migration.cpython-39.pyc
 .idea/deployment.xml
+.idea/deployment.xml
