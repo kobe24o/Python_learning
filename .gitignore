@@ -55,3 +55,17 @@ web_python_dev/fastapi_mysql/__pycache__/models.cpython-38.pyc
 web_python_dev/fastapi_mysql/__pycache__/schemas.cpython-38.pyc
 fastapi/5/__pycache__/main1.cpython-38.pyc
 fastapi/5/a.jpg
+.idea/deployment.xml
+.idea/remote-mappings.xml
+alembic/__pycache__/env.cpython-39.pyc
+alembic/versions/__pycache__/d5092612bece_initial_migration.cpython-39.pyc
+alembic/__pycache__/env.cpython-39.pyc
+web_python_dev/sqlalchemy1/__pycache__/models.cpython-39.pyc
+web_python_dev/sqlalchemy1/__pycache__/database.cpython-39.pyc
+web_python_dev/sqlalchemy1/__pycache__/app.cpython-39.pyc
+web_python_dev/sqlalchemy1/__pycache__/__init__.cpython-39.pyc
+web_python_dev/__pycache__/__init__.cpython-39.pyc
+*.pyc
+alembic/__pycache__/env.cpython-39.pyc
+alembic/versions/__pycache__/d5092612bece_initial_migration.cpython-39.pyc
+.idea/deployment.xml
