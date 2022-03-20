@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="python_learning">
     <serverData>
+      <paths name="M2">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="M3">
         <serverdata>
           <mappings>
@@ -9,6 +16,14 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="python_learning">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/opt/bdp/data01/chenmingming/python_learning" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
