@@ -1,0 +1,4 @@
+[tool.aerich]
+tortoise_orm = "web_python_dev.sql_tortoise_orm.app.TORTOISE_ORM"
+location = "./migrations"
+src_folder = "./."

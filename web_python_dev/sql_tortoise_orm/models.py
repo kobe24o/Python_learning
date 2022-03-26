@@ -56,6 +56,8 @@ class CommentDB(CommentBase):
 class PostPublic(PostDB):
     comments: List[CommentDB]
 
+    # list强制转换 tortoise-orm 到 pydantic
+    # pre=True 在pydantic验证之前进行调用
     @validator("comments", pre=True)
     def fetch_comments(cls, v):
         return list(v)
