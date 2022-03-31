@@ -6,12 +6,12 @@
 
 from typing import Optional
 from tortoise.exceptions import DoesNotExist
-from web_python_dev.authentication.email_sys.models import AccessToken, AccessTokenTortoise, UserDB, UserTortise
+from web_python_dev.authentication.email_sys.models import AccessToken, AccessTokenTortoise, UserDB, UserTortoise
 from web_python_dev.authentication.email_sys.password import verify_password
 
 async def authenticate(email: str, password: str) -> Optional[UserDB]:
     try:
-        user = await UserTortise.get(email=email)
+        user = await UserTortoise.get(email=email)
     except DoesNotExist:
         return None
     if not verify_password(password, user.hashed_password):
@@ -19,6 +19,6 @@ async def authenticate(email: str, password: str) -> Optional[UserDB]:
     return UserDB.from_orm(user)
 
 async def create_access_token(user: UserDB) -> AccessToken:
-    access_token = AccessToken(user_id=user.id)
+    access_token = AccessToken(user_col_id=user.id)
     access_token_tortoise = await AccessTokenTortoise.create(**access_token.dict())
     return AccessToken.from_orm(access_token_tortoise)

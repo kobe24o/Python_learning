@@ -17,11 +17,11 @@ from web_python_dev.authentication.email_sys.password import get_password_hash
 app = FastAPI()
 
 TORTOISE_ORM = {
-    'connections': {'dafault': 'sqlite://cp7_emailsys.db'},
+    'connections': {'default': 'sqlite://cp7_emailsys.db'},
     'apps': {
         'models': {
             'models': ['web_python_dev.authentication.email_sys.models'],
-            'dafault_connection': 'default',
+            'default_connection': 'default',
         }
     },
     'use_tz': True,
@@ -34,10 +34,10 @@ register_tortoise(
     add_exception_handlers=True,
 )
 
-async def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl='/token')))->UserTortoise:
+async def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl='token')))->UserTortoise:
     try:
-        access_token: AccessTokenTortoise = await AccessTokenTortoise.get(access_token=token, expires_date__gte=timezone.now()).prefetch_related('user')
-        return cast(UserTortoise, access_token.user)
+        access_token: AccessTokenTortoise = await AccessTokenTortoise.get(access_token=token, expiration_date__gte=timezone.now()).select_related('user_col')
+        return cast(UserTortoise, access_token.user_col)
     except DoesNotExist:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid token')
 
@@ -45,7 +45,7 @@ async def get_current_user(token: str = Depends(OAuth2PasswordBearer(tokenUrl='/
 async def register(user: UserCreate)->User:
     hashed_password = get_password_hash(user.password)
     try:
-        user_tortoise = await UserTortoise.create(**user.dict(), password=hashed_password)
+        user_tortoise = await UserTortoise.create(**user.dict(), hashed_password=hashed_password)
     except IntegrityError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='User email already exists')
     return User.from_orm(user_tortoise)
@@ -63,3 +63,7 @@ async def create_token(form_data: OAuth2PasswordRequestForm = Depends(OAuth2Pass
 @app.get('/protected-route', response_model=User)
 async def protected_route(user: UserDB = Depends(get_current_user)):
     return User.from_orm(user)
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run('app:app', host='127.0.0.1', port=8001, reload=True, debug=True)

@@ -35,9 +35,9 @@ class UserDB(User):
 
 
 class AccessToken(BaseModel):
-    user_id: int
+    user_col_id: int
     access_token: str = Field(default_factory=generate_token)
-    expire_time: datetime = Field(default_factory=get_expire_time)
+    expiration_date: datetime = Field(default_factory=get_expire_time)
 
     class Config:
         orm_mode = True
@@ -45,17 +45,17 @@ class AccessToken(BaseModel):
 
 class UserTortoise(Model):
     id = fields.IntField(pk=True, generated=True)
-    email = fields.CharField(max_length=255, unique=True, index=True, null=False)
-    hashed_password = fields.CharField(max_length=255, null=False)
+    email = fields.CharField(index=True, unique=True, null=False, max_length=255)
+    hashed_password = fields.CharField(null=False, max_length=255)
 
     class Meta:
-        table = 'users_table'
+        table = "users"
 
 
 class AccessTokenTortoise(Model):
     access_token = fields.CharField(pk=True, max_length=255)
-    user = fields.ForeignKeyField('models.UserTortise', null=False)
-    expire_time = fields.DatetimeField(null=False)
+    user_col = fields.ForeignKeyField("models.UserTortoise", null=False)
+    expiration_date = fields.DatetimeField(null=False)
 
     class Meta:
-        table = 'access_tokens_table'
+        table = "access_tokens"
