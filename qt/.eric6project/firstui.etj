@@ -1,0 +1,75 @@
+{
+  "header": {
+    "comment": "eric tasks file for project firstui",
+    "warning": "This file was generated automatically, do not edit.",
+    "saved": "2022-04-22, 09:59:21"
+  },
+  "ProjectScanFilter": "",
+  "Tasks": [
+    {
+      "summary": "WARNING: Any manual changes made to this file will be lost when pyuic5 is",
+      "description": "",
+      "priority": 1,
+      "lineno": 7,
+      "completed": false,
+      "created": 1650246511.8619814,
+      "type": 2,
+      "uid": "{941cd9c6-dbf4-42d9-9411-4f2742684f41}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_doublespinbox.py"
+    },
+    {
+      "summary": "WARNING: Any manual changes made to this file will be lost when pyuic5 is",
+      "description": "",
+      "priority": 1,
+      "lineno": 7,
+      "completed": false,
+      "created": 1650246607.4464872,
+      "type": 2,
+      "uid": "{8f65eea7-f29f-4bf4-b477-962bf6be6369}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_close_button_signal_slog.py"
+    },
+    {
+      "summary": "WARNING: Any manual changes made to this file will be lost when pyuic5 is",
+      "description": "",
+      "priority": 1,
+      "lineno": 7,
+      "completed": false,
+      "created": 1650330413.6289797,
+      "type": 2,
+      "uid": "{e032b34d-0f92-4ffa-bcec-bb497c60e47d}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_signal_slog1.py"
+    },
+    {
+      "summary": "TODO: not implemented yet",
+      "description": "",
+      "priority": 1,
+      "lineno": 35,
+      "completed": false,
+      "created": 1650592503.2071471,
+      "type": 1,
+      "uid": "{38194f42-dc88-4ef5-8490-3c238ab1146f}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\menu_bar_tool_bar.py"
+    },
+    {
+      "summary": "WARNING: Any manual changes made to this file will be lost when pyuic5 is",
+      "description": "",
+      "priority": 1,
+      "lineno": 7,
+      "completed": false,
+      "created": 1650592758.467325,
+      "type": 2,
+      "uid": "{a0d66e32-509c-4519-99a1-6196bcb06e1c}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_menu_bar_tool_bar.py"
+    }
+  ]
+}
