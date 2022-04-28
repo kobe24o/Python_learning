@@ -2,7 +2,7 @@
   "header": {
     "comment": "eric tasks file for project firstui",
     "warning": "This file was generated automatically, do not edit.",
-    "saved": "2022-04-22, 09:59:21"
+    "saved": "2022-04-25, 09:32:55"
   },
   "ProjectScanFilter": "",
   "Tasks": [
@@ -46,19 +46,6 @@
       "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_signal_slog1.py"
     },
     {
-      "summary": "TODO: not implemented yet",
-      "description": "",
-      "priority": 1,
-      "lineno": 35,
-      "completed": false,
-      "created": 1650592503.2071471,
-      "type": 1,
-      "uid": "{38194f42-dc88-4ef5-8490-3c238ab1146f}",
-      "parent_uid": "",
-      "expanded": false,
-      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\menu_bar_tool_bar.py"
-    },
-    {
       "summary": "WARNING: Any manual changes made to this file will be lost when pyuic5 is",
       "description": "",
       "priority": 1,
@@ -70,6 +57,32 @@
       "parent_uid": "",
       "expanded": false,
       "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_menu_bar_tool_bar.py"
+    },
+    {
+      "summary": "TODO: not implemented yet",
+      "description": "",
+      "priority": 1,
+      "lineno": 35,
+      "completed": false,
+      "created": 1650850328.0621095,
+      "type": 1,
+      "uid": "{e7a07882-a72f-458f-ba89-c9b7574f2db5}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\menu_bar_tool_bar.py"
+    },
+    {
+      "summary": "WARNING: Any manual changes made to this file will be lost when pyuic5 is",
+      "description": "",
+      "priority": 1,
+      "lineno": 7,
+      "completed": false,
+      "created": 1650850372.6942468,
+      "type": 2,
+      "uid": "{29814ad2-27c0-4cc5-8deb-a83eb703aa96}",
+      "parent_uid": "",
+      "expanded": false,
+      "filename": "D:\\gitcode\\Python_learning\\qt\\ch1\\Ui_childform2.py"
     }
   ]
 }
