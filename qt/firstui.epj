@@ -2,7 +2,7 @@
   "header": {
     "comment": "eric project file for project firstui",
     "copyright": "Copyright (C) 2022 , ",
-    "saved": "2022-04-30, 20:40:00"
+    "saved": "2022-05-02, 16:47:16"
   },
   "project": {
     "AUTHOR": "",
@@ -37,7 +37,9 @@
     "FORMS": [
       "ch1/doublespinbox.ui",
       "ch1/firstwindow.ui",
-      "ch1/add_resource.ui"
+      "ch1/add_resource.ui",
+      "ch4/status_bar1.ui",
+      "ch4/close_button1.ui"
     ],
     "HASH": "a544a724e74f6df0a6c396855f0d2c8e922b33f3",
     "IDLPARAMS": {
@@ -80,7 +82,9 @@
       "__init__.py",
       "ch1/Ui_doublespinbox.py",
       "ch1/Ui_add_resource.py",
-      "ch1/add_resource.py"
+      "ch1/add_resource.py",
+      "ch4/Ui_status_bar1.py",
+      "ch4/Ui_close_button1.py"
     ],
     "SPELLEXCLUDES": "",
     "SPELLLANGUAGE": "en_US",
