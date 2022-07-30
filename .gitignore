@@ -76,3 +76,4 @@ alembic/versions/__pycache__/d5092612bece_initial_migration.cpython-39.pyc
 web_python_dev/authentication/email_sys/cp7_emailsys.db
 web_python_dev/authentication/email_sys/cp7_emailsys.db-shm
 web_python_dev/authentication/email_sys/cp7_emailsys.db-wal
+.idea/deployment.xml
