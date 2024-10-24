@@ -109,6 +109,11 @@
             message.dataset.id = data.id;
             message.dataset.userId = data.userId;
             message.dataset.timestamp = data.timestamp;
+
+            // Format the timestamp to a readable date and time
+            const messageDate = new Date(parseInt(data.timestamp));
+            message.title = messageDate.toLocaleString();
+
             chat.appendChild(message);
             chat.scrollTop = chat.scrollHeight;  // Auto-scroll to the latest message
 
