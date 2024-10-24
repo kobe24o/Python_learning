@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebSocket Chat Room</title>
+    <meta charset="UTF-8"> <!-- 设置文档的字符编码为UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口以适应不同设备的宽度 -->
+    <title>WebSocket Chat Room</title> <!-- 网页标题 -->
     <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: Arial, sans-serif;  <!-- 设置页面字体为Arial，无衬线字体 -->
     }
 
     #chat {
@@ -50,18 +50,18 @@
 </style>
 </head>
 <body>
-<h1>WebSocket Chat Room</h1>
-<input type="text" id="usernameInput" placeholder="Enter username...">
-<button id="setUsernameButton">Set Username</button>
-<div id="chat"></div>
-<input type="text" id="messageInput" placeholder="Enter message...">
-<button id="sendButton">Send</button>
+<h1>WebSocket Chat Room</h1> <!-- 页面标题 -->
+<input type="text" id="usernameInput" placeholder="Enter username..."> <!-- 用户名输入框 -->
+<button id="setUsernameButton">Set Username</button> <!-- 设置用户名按钮 -->
+<div id="chat"></div> <!-- 聊天消息显示区域 -->
+<input type="text" id="messageInput" placeholder="Enter message..."> <!-- 消息输入框 -->
+<button id="sendButton">Send</button> <!-- 发送消息按钮 -->
 
 <script>
-    let username = '';
-    let userId = '';
+    let username = ''; <!-- 定义用户名变量 -->
+    let userId = ''; <!-- 定义用户ID变量 -->
 
-    // Function to generate a UUID
+    // 生成UUID的函数
     function generateUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -69,35 +69,35 @@
         });
     }
 
-    // Create WebSocket connection
+    // 创建WebSocket连接
     const socket = new WebSocket('ws://localhost:6789');
 
-    // Set username
+    // 设置用户名
     function setUsername() {
         const input = document.getElementById('usernameInput');
         username = input.value;
         if (username) {
-            userId = generateUUID();  // Generate a UUID for the user
-            input.disabled = true;
-            document.getElementById('setUsernameButton').disabled = true;
+            userId = generateUUID();  <!-- 生成用户的UUID -->
+            input.disabled = true; <!-- 禁用用户名输入框 -->
+            document.getElementById('setUsernameButton').disabled = true; <!-- 禁用设置用户名按钮 -->
         }
     }
 
     document.getElementById('setUsernameButton').onclick = setUsername;
 
-    // Focus on the username input field when the page loads
+    // 页面加载时聚焦用户名输入框
     window.onload = function() {
         document.getElementById('usernameInput').focus();
     };
 
-    // Handle Enter key to set username
+    // 处理Enter键设置用户名
     document.getElementById('usernameInput').addEventListener('keypress', function(event) {
         if (event.key === 'Enter') {
             setUsername();
         }
     });
 
-    // Handle incoming messages
+    // 处理接收到的消息
     socket.onmessage = function (event) {
         const chat = document.getElementById('chat');
         const data = JSON.parse(event.data);
@@ -110,23 +110,23 @@
             message.dataset.userId = data.userId;
             message.dataset.timestamp = data.timestamp;
 
-            // Format the timestamp to a readable date and time
+            // 将时间戳格式化为可读的日期和时间
             const messageDate = new Date(parseInt(data.timestamp));
             message.title = messageDate.toLocaleString();
 
             chat.appendChild(message);
-            chat.scrollTop = chat.scrollHeight;  // Auto-scroll to the latest message
+            chat.scrollTop = chat.scrollHeight;  <!-- 自动滚动到最新消息 -->
 
-            // Add context menu event listener
+            // 添加右键菜单事件监听器
             message.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
-                if (message.dataset.userId !== userId) return; // Only allow revoking own messages
+                if (message.dataset.userId !== userId) return; <!-- 只允许撤回自己的消息 -->
 
                 const messageTimestamp = new Date(parseInt(message.dataset.timestamp));
                 const currentTime = new Date();
-                const timeDifference = (currentTime - messageTimestamp) / 1000; // Time difference in seconds
+                const timeDifference = (currentTime - messageTimestamp) / 1000; <!-- 时间差（秒） -->
 
-                if (timeDifference > 60) return; // Do not show menu if message is older than 1 minute
+                if (timeDifference > 60) return; <!-- 如果消息超过1分钟，不显示菜单 -->
 
                 const menu = document.createElement('div');
                 menu.style.position = 'absolute';
@@ -138,14 +138,14 @@
                 menu.innerHTML = '<div id="revoke">Revoke</div>';
                 document.body.appendChild(menu);
 
-                // Revoke functionality
+                // 撤回功能
                 document.getElementById('revoke').onclick = function () {
                     const messageId = message.dataset.id;
                     socket.send(JSON.stringify({type: 'revoke', id: messageId, userId: userId}));
                     document.body.removeChild(menu);
                 };
 
-                // Remove menu when clicking elsewhere
+                // 点击其他地方时移除菜单
                 document.addEventListener('click', function () {
                     if (menu) {
                         document.body.removeChild(menu);
@@ -160,27 +160,28 @@
         }
     };
 
-    // Send message
+    // 发送消息
     function sendMessage() {
         const input = document.getElementById('messageInput');
         const message = input.value;
         if (message && username) {
             const data = JSON.stringify({
                 type: 'message',
-                id: generateUUID(),  // Generate a UUID for the message
+                id: generateUUID(),  <!-- 生成消息的UUID -->
                 username: username,
                 userId: userId,
                 message: message,
-                timestamp: Date.now()  // Add timestamp to the message
+                timestamp: Date.now()
+                    // <!-- 添加消息的时间戳 -->
             });
             socket.send(data);
-            input.value = '';  // Clear input after sending
+            input.value = '';  <!-- 发送后清空输入框 -->
         }
     }
 
     document.getElementById('sendButton').onclick = sendMessage;
 
-    // Handle Ctrl+Enter to send message
+    // 处理Ctrl+Enter发送消息
     document.getElementById('messageInput').addEventListener('keydown', function(event) {
         if (event.ctrlKey && event.key === 'Enter') {
             sendMessage();
