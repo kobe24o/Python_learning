@@ -85,6 +85,7 @@
             message.className = 'message ' + (data.userId === userId ? 'self' : 'other');
             message.dataset.id = data.id;
             message.dataset.userId = data.userId;
+            message.dataset.timestamp = data.timestamp;
             chat.appendChild(message);
             chat.scrollTop = chat.scrollHeight;  // Auto-scroll to the latest message
 
@@ -92,6 +93,12 @@
             message.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
                 if (message.dataset.userId !== userId) return; // Only allow revoking own messages
+
+                const messageTimestamp = new Date(parseInt(message.dataset.timestamp));
+                const currentTime = new Date();
+                const timeDifference = (currentTime - messageTimestamp) / 1000; // Time difference in seconds
+
+                if (timeDifference > 60) return; // Do not show menu if message is older than 1 minute
 
                 const menu = document.createElement('div');
                 menu.style.position = 'absolute';
@@ -135,7 +142,8 @@
                 id: generateUUID(),  // Generate a UUID for the message
                 username: username,
                 userId: userId,
-                message: message
+                message: message,
+                timestamp: Date.now()  // Add timestamp to the message
             });
             socket.send(data);
             input.value = '';  // Clear input after sending

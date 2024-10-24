@@ -15,9 +15,9 @@ async def handle_client(websocket, path):
             data = json.loads(message)
             if data['type'] == 'message':
                 # Ensure the required keys are present
-                if 'id' in data and 'username' in data and 'message' in data:
-                    # Store the message with its ID and username
-                    messages.append({'id': data['id'], 'username': data['username'], 'message': data['message'], 'userId': data['userId']})
+                if 'id' in data and 'username' in data and 'message' in data and 'timestamp' in data:
+                    # Store the message with its ID, username, and timestamp
+                    messages.append({'id': data['id'], 'username': data['username'], 'message': data['message'], 'userId': data['userId'], 'timestamp': data['timestamp']})
                     # Broadcast the message to all connected clients
                     await broadcast(json.dumps(data))
             elif data['type'] == 'revoke':
