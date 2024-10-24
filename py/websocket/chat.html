@@ -73,15 +73,29 @@
     const socket = new WebSocket('ws://localhost:6789');
 
     // Set username
-    document.getElementById('setUsernameButton').onclick = function () {
+    function setUsername() {
         const input = document.getElementById('usernameInput');
         username = input.value;
         if (username) {
             userId = generateUUID();  // Generate a UUID for the user
             input.disabled = true;
-            this.disabled = true;
+            document.getElementById('setUsernameButton').disabled = true;
         }
+    }
+
+    document.getElementById('setUsernameButton').onclick = setUsername;
+
+    // Focus on the username input field when the page loads
+    window.onload = function() {
+        document.getElementById('usernameInput').focus();
     };
+
+    // Handle Enter key to set username
+    document.getElementById('usernameInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            setUsername();
+        }
+    });
 
     // Handle incoming messages
     socket.onmessage = function (event) {
@@ -142,7 +156,7 @@
     };
 
     // Send message
-    document.getElementById('sendButton').onclick = function () {
+    function sendMessage() {
         const input = document.getElementById('messageInput');
         const message = input.value;
         if (message && username) {
@@ -157,7 +171,16 @@
             socket.send(data);
             input.value = '';  // Clear input after sending
         }
-    };
+    }
+
+    document.getElementById('sendButton').onclick = sendMessage;
+
+    // Handle Ctrl+Enter to send message
+    document.getElementById('messageInput').addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.key === 'Enter') {
+            sendMessage();
+        }
+    });
 </script>
 </body>
 </html>
