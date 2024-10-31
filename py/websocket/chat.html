@@ -5,49 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口以适应不同设备的宽度 -->
     <title>WebSocket Chat Room</title> <!-- 网页标题 -->
     <style>
-    body {
-        font-family: Arial, sans-serif;  <!-- 设置页面字体为Arial，无衬线字体 -->
-    }
+        body {
+            font-family: Arial, sans-serif;
+        <!-- 设置页面字体为Arial，无衬线字体 -->
+        }
 
-    #chat {
-        width: 80%;
-        height: 400px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        overflow-y: scroll;
-        display: flex;
-        flex-direction: column;
-    }
+        #chat {
+            width: 80%;
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .message {
-        margin: 5px 0;
-        padding: 10px;
-        border-radius: 10px;
-        max-width: 60%;
-        display: inline-block;
-    }
+        .message {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+            display: inline-block;
+        }
 
-    .message.self {
-        background-color: #d4edda; /* Green background for own messages */
-        align-self: flex-end;
-        text-align: right;
-    }
+        .message.self {
+            background-color: #d4edda; /* Green background for own messages */
+            align-self: flex-end;
+            text-align: right;
+        }
 
-    .message.other {
-        background-color: #cce5ff; /* Blue background for others' messages */
-        align-self: flex-start;
-        text-align: left;
-    }
+        .message.other {
+            background-color: #cce5ff; /* Blue background for others' messages */
+            align-self: flex-start;
+            text-align: left;
+        }
 
-    #messageInput {
-        width: 70%;
-        padding: 10px;
-    }
+        #messageInput {
+            width: 70%;
+            padding: 10px;
+        }
 
-    #sendButton {
-        padding: 10px 20px;
-    }
-</style>
+        #sendButton {
+            padding: 10px 20px;
+        }
+    </style>
 </head>
 <body>
 <h1>WebSocket Chat Room</h1> <!-- 页面标题 -->
@@ -58,46 +59,40 @@
 <button id="sendButton">Send</button> <!-- 发送消息按钮 -->
 
 <script>
-    let username = ''; <!-- 定义用户名变量 -->
-    let userId = ''; <!-- 定义用户ID变量 -->
+    let username = '';
+    let userId = '';
 
-    // 生成UUID的函数
     function generateUUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
         });
     }
 
-    // 创建WebSocket连接
     const socket = new WebSocket('ws://localhost:6789');
 
-    // 设置用户名
     function setUsername() {
         const input = document.getElementById('usernameInput');
         username = input.value;
         if (username) {
-            userId = generateUUID();  <!-- 生成用户的UUID -->
-            input.disabled = true; <!-- 禁用用户名输入框 -->
-            document.getElementById('setUsernameButton').disabled = true; <!-- 禁用设置用户名按钮 -->
+            userId = generateUUID();
+            input.disabled = true;
+            document.getElementById('setUsernameButton').disabled = true;
         }
     }
 
     document.getElementById('setUsernameButton').onclick = setUsername;
 
-    // 页面加载时聚焦用户名输入框
-    window.onload = function() {
+    window.onload = function () {
         document.getElementById('usernameInput').focus();
     };
 
-    // 处理Enter键设置用户名
-    document.getElementById('usernameInput').addEventListener('keypress', function(event) {
+    document.getElementById('usernameInput').addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             setUsername();
         }
     });
 
-    // 处理接收到的消息
     socket.onmessage = function (event) {
         const chat = document.getElementById('chat');
         const data = JSON.parse(event.data);
@@ -110,23 +105,21 @@
             message.dataset.userId = data.userId;
             message.dataset.timestamp = data.timestamp;
 
-            // 将时间戳格式化为可读的日期和时间
             const messageDate = new Date(parseInt(data.timestamp));
             message.title = messageDate.toLocaleString();
 
             chat.appendChild(message);
-            chat.scrollTop = chat.scrollHeight;  <!-- 自动滚动到最新消息 -->
+            chat.scrollTop = chat.scrollHeight;
 
-            // 添加右键菜单事件监听器
             message.addEventListener('contextmenu', function (e) {
                 e.preventDefault();
-                if (message.dataset.userId !== userId) return; <!-- 只允许撤回自己的消息 -->
+                if (message.dataset.userId !== userId) return;
 
                 const messageTimestamp = new Date(parseInt(message.dataset.timestamp));
                 const currentTime = new Date();
-                const timeDifference = (currentTime - messageTimestamp) / 1000; <!-- 时间差（秒） -->
+                const timeDifference = (currentTime - messageTimestamp) / 1000;
 
-                if (timeDifference > 60) return; <!-- 如果消息超过1分钟，不显示菜单 -->
+                if (timeDifference > 60) return;
 
                 const menu = document.createElement('div');
                 menu.style.position = 'absolute';
@@ -138,14 +131,12 @@
                 menu.innerHTML = '<div id="revoke">撤回</div>';
                 document.body.appendChild(menu);
 
-                // 撤回功能
                 document.getElementById('revoke').onclick = function () {
                     const messageId = message.dataset.id;
                     socket.send(JSON.stringify({type: 'revoke', id: messageId, userId: userId}));
                     document.body.removeChild(menu);
                 };
 
-                // 点击其他地方时移除菜单
                 document.addEventListener('click', function () {
                     if (menu) {
                         document.body.removeChild(menu);
@@ -160,29 +151,91 @@
         }
     };
 
-    // 发送消息
-    function sendMessage() {
-        const input = document.getElementById('messageInput');
-        const message = input.value;
-        if (message && username) {
-            const data = JSON.stringify({
-                type: 'message',
-                id: generateUUID(),  <!-- 生成消息的UUID -->
-                username: username,
-                userId: userId,
-                message: message,
-                timestamp: Date.now()
-                    // <!-- 添加消息的时间戳 -->
+    async function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const message = input.value;
+    if (message && username) {
+        const userMessageData = {
+            type: 'message',
+            id: generateUUID(),
+            username: username,
+            userId: userId,
+            message: message,
+            timestamp: Date.now()
+        };
+
+        // Send the user's message to the WebSocket server
+        socket.send(JSON.stringify(userMessageData));
+
+        if (message.startsWith('@bot')) {
+            const userMessage = message.slice(4).trim();
+            const response = await fetch('http://localhost:11434/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'qwen2.5:1.5b',
+                    messages: [{role: 'user', content: userMessage}],
+                    stream: true
+                })
             });
-            socket.send(data);
-            input.value = '';  <!-- 发送后清空输入框 -->
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let botMessageContent = '';
+            const botMessage = {
+                type: 'message',
+                id: generateUUID(),
+                username: 'Bot',
+                userId: 'bot',
+                message: '',
+                timestamp: Date.now()
+            };
+
+            while (true) {
+                const {done, value} = await reader.read();
+                if (done) break;
+                const chunk = decoder.decode(value, {stream: true});
+
+                // Process each JSON object
+                const lines = chunk.split('\n');
+                for (const line of lines) {
+                    if (line.trim()) {
+                        const data = JSON.parse(line);
+                        if (data.message && data.message.content) {
+                            botMessageContent += data.message.content;
+                            botMessage.message = botMessageContent;
+                            // Update bot message
+                            if (data.userId === 'bot') {
+                                // Stream output in own chat window
+                                const chat = document.getElementById('chat');
+                                const messageElement = document.querySelector(`.message[data-id="${botMessage.id}"]`);
+                                if (messageElement) {
+                                    messageElement.textContent = `Bot: ${botMessageContent}`;
+                                } else {
+                                    const message = document.createElement('div');
+                                    message.textContent = `Bot: ${botMessageContent}`;
+                                    message.className = 'message self';
+                                    message.dataset.id = botMessage.id;
+                                    chat.appendChild(message);
+                                }
+                                chat.scrollTop = chat.scrollHeight;
+                            }
+                        }
+                    }
+                }
+            }
+            // Send the combined bot message
+            socket.send(JSON.stringify(botMessage));
         }
+        input.value = '';
     }
+}
 
     document.getElementById('sendButton').onclick = sendMessage;
 
-    // 处理Ctrl+Enter发送消息
-    document.getElementById('messageInput').addEventListener('keydown', function(event) {
+    document.getElementById('messageInput').addEventListener('keydown', function (event) {
         if (event.ctrlKey && event.key === 'Enter') {
             sendMessage();
         }
