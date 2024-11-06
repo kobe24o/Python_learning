@@ -37,7 +37,7 @@ async def broadcast(message):  # 定义异步函数广播消息
 
 # 启动WebSocket服务器
 async def start_server():  # 定义异步函数启动服务器
-    async with websockets.serve(handle_client, "localhost", 6789):  # 启动WebSocket服务器，监听本地6789端口
+    async with websockets.serve(handle_client, "0.0.0.0", 6792):  # 启动WebSocket服务器，监听本地6789端口
         print("WebSocket server started")  # 打印服务器启动信息
         await asyncio.Future()  # 运行服务器直到手动停止
 
